@@ -48,8 +48,13 @@ public class CustomerController  {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> removeCustomer(@PathVariable("id") long id) {
         customerService.removeCustomer(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build().ok("Deleted");
         }
+//
+//    @GetMapping("/phonenumber")
+//    public Customer getCustomer (@RequestParam Integer phonenumber) {
+//        return customerService.getByPhoneNumber(phonenumber);
+//    }
     }
 
 

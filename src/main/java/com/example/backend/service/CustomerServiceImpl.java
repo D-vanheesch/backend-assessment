@@ -97,7 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
 //
 //    }
         }
-//query search
+    //query search
     @Override
     public Customer getByFirstName(String firstname) {
         Optional<Customer> optionalCustomer = customerRepository.findCustomerByFirstName(firstname);
@@ -107,4 +107,14 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RecordNotFoundException("Person does not exist");
         }
     }
+
+//    @Override
+//    public Customer getByPhoneNumber(Integer phoneNumber) {
+//        Optional<Customer> optionalCustomer = customerRepository.findCustomerByPhoneNumber(phoneNumber);
+//        if (optionalCustomer.isPresent()) {
+//            return optionalCustomer.get();
+//        } else {
+//            throw new RecordNotFoundException("Phonenumber invalid");
+//        }
+//    }
 }

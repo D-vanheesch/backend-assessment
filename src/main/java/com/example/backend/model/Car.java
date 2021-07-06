@@ -6,24 +6,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "car")
+@Table (name = "cars")
 public class Car {
 
     @Id
     @GeneratedValue
     private long id;
     private String licensePlate;
-    private String brand;
-    private Integer carCustomerId;
+    private String dayOfCarCheck;
+    private String customerAgrees;
+    private String dayOfRepairJob;
 
-    public Car () {
-    }
-
-    public Car(String licensePlate, String brand, Integer carCustomerId) {
-        this.licensePlate = licensePlate;
-        this.brand = brand;
-        this.carCustomerId = carCustomerId;
-    }
+//    public Car () {
+//    }
+//
+//    public Car(String licensePlate, String brand, Integer carCustomerId) {
+//        this.licensePlate = licensePlate;
+//        this.brand = brand;
+//        this.carCustomerId = carCustomerId;
+//    }
 
     public long getId() {
         return id;
@@ -41,20 +42,27 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getDayOfCarCheck() {
+        return dayOfCarCheck;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setDayOfCarCheck(String dayOfCarCheck) {
+        this.dayOfCarCheck = dayOfCarCheck;
     }
 
-    public Integer getCarCustomerId() {
-        System.out.println(carCustomerId);
-            return carCustomerId;
+    public String getCustomerAgrees() {
+        return customerAgrees;
     }
 
-    public void setCarCustomerId(Integer carCustomerId) {
-        this.carCustomerId = carCustomerId;
+    public void setCustomerAgrees(String customerAgrees) {
+        this.customerAgrees = customerAgrees;
+    }
+
+    public String getDayOfRepairJob() {
+        return dayOfRepairJob;
+    }
+
+    public void setDayOfRepairJob(String dayOfRepairJob) {
+        this.dayOfRepairJob = dayOfRepairJob;
     }
 }

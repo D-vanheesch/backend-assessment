@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "customers")
+@Table (name = "customer")
 @RestController
 public class Customer {
 
@@ -21,6 +21,7 @@ public class Customer {
     private String secondName;
     private String residence;
     private String emailAdress;
+    private Integer phoneNumber;
     private Integer age;
 
     @OneToOne
@@ -65,6 +66,14 @@ public class Customer {
         this.secondName = secondName;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public String getResidence() {
         return residence;
     }
@@ -79,6 +88,14 @@ public class Customer {
 
     public void setEmailAdress(String emailAdress) {
         this.emailAdress = emailAdress;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getAge() {

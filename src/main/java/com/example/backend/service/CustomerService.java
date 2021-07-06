@@ -15,6 +15,6 @@ public interface CustomerService {
 
     //query uitbreiding
     Customer getByFirstName(String firstname);
-
+//    Customer getByPhoneNumber(Integer phoneNumber);
 
 }

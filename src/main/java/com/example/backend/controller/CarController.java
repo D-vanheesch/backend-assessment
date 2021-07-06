@@ -1,36 +1,44 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Car;
-import com.example.backend.repository.CarRepository;
+import com.example.backend.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/v1")
-public class CarController  {
+@RequestMapping("cars")
+public class CarController {
 
     @Autowired
-    private CarRepository carRepository;
-
-    @GetMapping("/car")
-    public List<Car> getAllCars() {
-//        for (int i = 0; i < carRepository.findAll().size(); i++) {
-//            System.out.println(carRepository.findAll().get(i).getClass().getSimpleName());
-//        }
-        return carRepository.findAll();
+    private CarService carService;
+    //krijgt verzoek binnen
+    @GetMapping("")
+    public ResponseEntity<Object> getCar() {
+        return ResponseEntity.ok(carService.getCar());
     }
-
-//    @GetMapping("/car/{id}")
-//    public Optional<Car> findOne(@PathVariable Long id) {
-//        return carRepository.findAll().get;
-//    }
-
     //create employee rest API
-    @PostMapping("car")
-    public Car createCar (@RequestBody Car car) {
-        return carRepository.save(car);
+    @PostMapping("")
+    public ResponseEntity<Object> addCar(@RequestBody Car car) {
+        carService.addCar(car);
+        return ResponseEntity.ok("Added");
+    }
+    //get 1 employee
+    //krijgt verzoek binnen
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getCar(@PathVariable("id") long id) {
+        Car car = carService.getCar(id);
+        return ResponseEntity.ok(car);
+    }
+    //query to search on firstname (customers/firstname?firstname=David
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateCar(@PathVariable("id") long id, @RequestBody Car updateCar) {
+        carService.updateCar(id, updateCar);
+        return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> removeCar(@PathVariable("id") long id) {
+        carService.removeCar(id);
+        return ResponseEntity.noContent().build().ok("Deleted");
     }
 }
