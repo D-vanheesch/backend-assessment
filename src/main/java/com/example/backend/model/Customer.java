@@ -12,29 +12,32 @@ import javax.persistence.*;
 public class Customer {
 
     // attributen
+    //Column te gebruiken voor custom namen van je tabel
     @Id
     @GeneratedValue
     private long id;
+
     private String firstName;
     private String secondName;
     private String residence;
     private String emailAdress;
-    private String carPapers;
     private Integer age;
 
-    public Customer () {
+    @OneToOne
+    private Car car;
 
-    }
-
-    //generate constructer
-    public Customer(String firstName, String secondName, String residence, String emailAdress, String carPapers, Integer age) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.residence = residence;
-        this.emailAdress = emailAdress;
-        this.carPapers = carPapers;
-        this.age = age;
-    }
+//    public Customer () {
+//
+//    }
+//
+////    generate constructer
+//    public Customer(String firstName, String secondName, String residence, String emailAdress, Integer age) {
+//        this.firstName = firstName;
+//        this.secondName = secondName;
+//        this.residence = residence;
+//        this.emailAdress = emailAdress;
+//        this.age = age;
+//    }
 
     // setters en getters
 
@@ -76,14 +79,6 @@ public class Customer {
 
     public void setEmailAdress(String emailAdress) {
         this.emailAdress = emailAdress;
-    }
-
-    public String getCarPapers() {
-        return carPapers;
-    }
-
-    public void setCarPapers(String carPapers) {
-        this.carPapers = carPapers;
     }
 
     public int getAge() {

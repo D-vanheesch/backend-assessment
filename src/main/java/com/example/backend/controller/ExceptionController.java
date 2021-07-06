@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+//logica voor fout afhandeling via controlleradvice.
 @ControllerAdvice
 //404 not found error weergeven als exceptioncontroller
 public class ExceptionController {

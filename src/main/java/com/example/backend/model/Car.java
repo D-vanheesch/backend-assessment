@@ -17,8 +17,6 @@ public class Car {
     private Integer carCustomerId;
 
     public Car () {
-        System.out.println(carCustomerId);
-        System.out.println("test");
     }
 
     public Car(String licensePlate, String brand, Integer carCustomerId) {
