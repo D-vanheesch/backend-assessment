@@ -6,8 +6,8 @@ import com.example.backend.model.Customer;
 import java.util.List;
 
 public interface CustomerService {
-
     List<Customer> getCustomers();
+
     Customer getCustomer(long id);
     Customer addCustomer(Customer customer);
     void removeCustomer(long id);

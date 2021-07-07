@@ -1,13 +1,14 @@
 package com.example.backend.model;
 
-//domein klasses
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.persistence.*;
 
 @Entity
-@Table (name = "customer")
+@Table (name = "customers")
 @RestController
 public class Customer {
 
@@ -16,31 +17,19 @@ public class Customer {
     @Id
     @GeneratedValue
     private long id;
-
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String residence;
     private String emailAdress;
     private Integer phoneNumber;
     private Integer age;
 
     @OneToOne
+    @Cascade(CascadeType.ALL)
+    //gaat de loop tegen om van customer nog een Json te maken.
+    @JsonManagedReference
     private Car car;
 
-//    public Customer () {
-//
-//    }
-//
-////    generate constructer
-//    public Customer(String firstName, String secondName, String residence, String emailAdress, Integer age) {
-//        this.firstName = firstName;
-//        this.secondName = secondName;
-//        this.residence = residence;
-//        this.emailAdress = emailAdress;
-//        this.age = age;
-//    }
-
-    // setters en getters
 
     public long getId() {
         return id;
@@ -59,11 +48,11 @@ public class Customer {
     }
 
     public String getSecondName() {
-        return secondName;
+        return lastName;
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = secondName;
+        this.lastName = secondName;
     }
 
     public Car getCar() {
