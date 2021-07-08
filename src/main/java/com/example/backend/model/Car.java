@@ -3,6 +3,7 @@ package com.example.backend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "cars")
@@ -14,13 +15,14 @@ public class Car {
 
     private String licensePlate;
     private String dayOfCarCheck;
-    private String customerAgrees;
     private String dayOfRepairJob;
 
     @OneToOne(mappedBy = "car")
     @JsonBackReference
     private Customer customer;
 
+    @OneToMany(mappedBy = "car")
+    private List<RepairJob> repairJobs;
 
     public long getId() {
         return id;
@@ -46,14 +48,6 @@ public class Car {
         this.dayOfCarCheck = dayOfCarCheck;
     }
 
-    public String getCustomerAgrees() {
-        return customerAgrees;
-    }
-
-    public void setCustomerAgrees(String customerAgrees) {
-        this.customerAgrees = customerAgrees;
-    }
-
     public String getDayOfRepairJob() {
         return dayOfRepairJob;
     }
@@ -68,5 +62,13 @@ public class Car {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<RepairJob> getRepairJobs() {
+        return repairJobs;
+    }
+
+    public void setRepairJobs(List<RepairJob> repairJobs) {
+        this.repairJobs = repairJobs;
     }
 }

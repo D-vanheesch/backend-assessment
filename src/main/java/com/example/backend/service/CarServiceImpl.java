@@ -12,22 +12,25 @@ import java.util.Optional;
 @Service
 public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
+
     @Autowired
     public CarServiceImpl(CarRepository customerRepository) {
         this.carRepository = customerRepository;
     }
     //    private List<Customer> customers = new ArrayList<>();
+
     @Override
     public List<Car> getCar() {
         return carRepository.findAll();
     }
+
     @Override
     public Car getCar ( long id) {
         Optional<Car> car = carRepository.findById(id);
         if (car.isPresent()) {
             return car.get();
         } else {
-            throw new RecordNotFoundException("Person does not exist");
+            throw new RecordNotFoundException("Car does not exist");
         }
     }
     @Override
