@@ -36,18 +36,6 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             throw new RecordNotFoundException("Person does not exist");
         }
-////        return null;
-//        Customer customer = null;
-//        for (int i = 0; i < customers.size(); i++) {
-//            if (id == customers.get(i).getId()) {
-//                customer = customers.get(i);
-//            }
-//        }
-//        //indien ID niet bestaat, geef foutmelding weer
-//        if (customer == null) {
-//            throw new RecordNotFoundException("id not found");
-//        }
-//        return customer;
     }
 
     @Override
@@ -59,15 +47,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
         public void removeCustomer ( long id){
         customerRepository.deleteById(id);
-//        Customer customer = null;
-//        for (int i=0; i < customers.size(); i++) {
-//            if (id == customers.get(i).getId()) {
-//                customers.remove(i);
-//            }
-//        }
-//        if (customer == null) {
-//            throw new RecordNotFoundException("id not found");
-//        }
         }
 
         @Override
@@ -78,24 +57,6 @@ public class CustomerServiceImpl implements CustomerService {
            } else {
                throw new RecordNotFoundException("Person does not exist");
            }
-//        Customer customer = null;
-//        for (int i = 0; i < customers.size(); i++) {
-//            if (id == customers.get(i).getId()) {
-//                customer = customers.get(i);
-//            }
-//        }
-//        if (customer == null) {
-//            throw new RecordNotFoundException("id not found");
-//        } else {
-//            customer.setFirstName(updateCustomer.getFirstName());
-//            customer.setSecondName(updateCustomer.getSecondName());
-//            customer.setResidence(updateCustomer.getResidence());
-//            customer.setAge(updateCustomer.getAge());
-//            customer.setEmailAdress(updateCustomer.getEmailAdress());
-//            customer.setCarPapers(updateCustomer.getCarPapers());
-//        }
-//
-//    }
         }
     //query search
     @Override
@@ -107,14 +68,4 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RecordNotFoundException("Person does not exist");
         }
     }
-
-//    @Override
-//    public Customer getByPhoneNumber(Integer phoneNumber) {
-//        Optional<Customer> optionalCustomer = customerRepository.findCustomerByPhoneNumber(phoneNumber);
-//        if (optionalCustomer.isPresent()) {
-//            return optionalCustomer.get();
-//        } else {
-//            throw new RecordNotFoundException("Phonenumber invalid");
-//        }
-//    }
 }

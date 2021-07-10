@@ -1,6 +1,7 @@
 package com.example.backend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,6 +17,9 @@ public class RepairJob {
 
     @ManyToOne
     private Car car;
+
+    @OneToMany(mappedBy = "repairJob")
+    private List<RepairItem> repairItems;
 
     public Long getId() {
         return id;
@@ -55,5 +59,13 @@ public class RepairJob {
 
     public void setActions(String actions) {
         this.actions = actions;
+    }
+
+    public List<RepairItem> getRepairItems() {
+        return repairItems;
+    }
+
+    public void setRepairItems(List<RepairItem> repairItems) {
+        this.repairItems = repairItems;
     }
 }
