@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.FileUpload;
 import com.example.backend.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,18 +7,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/file-upload")
+@RequestMapping("api/file-upload")
 @CrossOrigin
 public class FileUploadController {
 
     @Autowired
     private FileUploadService fileUploadService;
 
-    @GetMapping("/files")
+    @GetMapping("")
     public ResponseEntity<Object> getFilesInfo() {
         return ResponseEntity.ok(fileUploadService.getFiles());
     }
-    @GetMapping("/files/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Object> getFileInfo(@PathVariable("id") long id) {
         fileUploadService.getFileById(id);
         return ResponseEntity.ok(fileUploadService.getFileById(id));
@@ -33,12 +32,12 @@ public class FileUploadController {
 //    public ResponseEntity<Object> getFileData(@PathVariable long id) {
 //        return ResponseEntity.ok(fileUploadService.getFileById(id));
 //    }
-    @PostMapping("/files")
+    @PostMapping("")
     public ResponseEntity<Object> uploadFile(@RequestBody MultipartFile file) {
         fileUploadService.uploadFile(file);
         return ResponseEntity.ok("Added");
     }
-    @DeleteMapping("/files/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteFile(@PathVariable("id") long id) {
         fileUploadService.deleteFile(id);
         return ResponseEntity.noContent().build().ok("Deleted");

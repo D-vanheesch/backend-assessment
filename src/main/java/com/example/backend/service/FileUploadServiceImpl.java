@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
     private FileUploadRepository fileUploadRepository;
+
     @Autowired
     public FileUploadServiceImpl(FileUploadRepository fileUploadRepository) {
         this.fileUploadRepository = fileUploadRepository;
@@ -21,6 +22,7 @@ public class FileUploadServiceImpl implements FileUploadService {
     public Iterable<FileUpload> getFiles() {
         return fileUploadRepository.findAll();
     }
+
     @Override
     public long uploadFile(MultipartFile file) {
         String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
