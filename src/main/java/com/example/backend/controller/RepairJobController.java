@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.Customer;
 import com.example.backend.model.RepairJob;
 import com.example.backend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,12 @@ public class RepairJobController {
             RepairJob repairJob = repairJobService.getRepairJob(id);
             return ResponseEntity.ok(repairJob);
         }
-        //query to search on firstname (customers/firstname?firstname=David
+
+        @GetMapping("/customerAgrees")
+        public RepairJob getRepairJob(@RequestParam String customerAgrees) {
+        return repairJobService.getByCustomerAgrees(customerAgrees);
+        }
+
         @PutMapping("/{id}")
         public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob updateRepairJob) {
             repairJobService.updateRepairJob(id, updateRepairJob);
@@ -42,5 +48,4 @@ public class RepairJobController {
             repairJobService.removeRepairJob(id);
             return ResponseEntity.noContent().build().ok("Deleted");
         }
-
 }

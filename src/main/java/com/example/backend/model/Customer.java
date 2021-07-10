@@ -1,5 +1,6 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
@@ -29,6 +30,10 @@ public class Customer {
     //gaat de loop tegen om van customer nog een Json te maken.
     @JsonManagedReference
     private Car car;
+
+    @OneToOne(mappedBy = "customer")
+    @JsonBackReference
+    private RepairJob repairJob;
 
 
     public long getId() {
@@ -95,4 +100,11 @@ public class Customer {
         this.age = age;
     }
 
+    public RepairJob getRepairJob() {
+        return repairJob;
+    }
+
+    public void setRepairJob(RepairJob repairJob) {
+        this.repairJob = repairJob;
+    }
 }

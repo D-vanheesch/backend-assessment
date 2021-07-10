@@ -1,8 +1,11 @@
 package com.example.backend.service;
 
 import com.example.backend.exception.RecordNotFoundException;
+import com.example.backend.model.Car;
 import com.example.backend.model.Customer;
+import com.example.backend.repository.CarRepository;
 import com.example.backend.repository.CustomerRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +17,13 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
+    private CarRepository carRepository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CarRepository carRepository) {
         this.customerRepository = customerRepository;
+        this.carRepository = carRepository;
+
     }
 //    private List<Customer> customers = new ArrayList<>();
 
@@ -40,7 +46,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer addCustomer (Customer customer){
-//            customers.add(customer);
             return customerRepository.save(customer);
         }
 
@@ -68,4 +73,23 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RecordNotFoundException("Person does not exist");
         }
     }
+
+    //koppeling car met customer??
+//   @Override
+//    public Customer findByCarId (String id) {
+//        return customerRepository.findByCarId(id);
+//    }
+
+//    @Override
+//    public Customer setCustomerCar(String customerId, String carId) {
+//        var customer = customerRepository.findCustomerById(customerId);
+//        var car = carRepository.findCarById(carId);
+//
+//        if (customer.isPresent() && car.isPresent()) {
+//            customer.get().setCar(car.get());
+//            return customerRepository.save(customer.get());
+//        } else {
+//           throw new NotFoundException("Customer does not exist");
+//        }
+//    }
 }

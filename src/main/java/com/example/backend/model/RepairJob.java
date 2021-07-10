@@ -1,5 +1,8 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +20,12 @@ public class RepairJob {
 
     @ManyToOne
     private Car car;
+
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //gaat de loop tegen om van customer nog een Json te maken.
+    @JsonManagedReference
+    private Customer customer;
 
     @OneToMany(mappedBy = "repairJob")
     private List<RepairItem> repairItems;
@@ -67,5 +76,13 @@ public class RepairJob {
 
     public void setRepairItems(List<RepairItem> repairItems) {
         this.repairItems = repairItems;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
