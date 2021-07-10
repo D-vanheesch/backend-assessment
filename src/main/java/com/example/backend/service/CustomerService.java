@@ -1,8 +1,6 @@
 package com.example.backend.service;
-//Business logica rondom customer
 
 import com.example.backend.model.Customer;
-
 import java.util.List;
 
 public interface CustomerService {

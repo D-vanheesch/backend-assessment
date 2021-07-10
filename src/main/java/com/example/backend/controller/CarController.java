@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("cars")
+@RequestMapping("api/cars")
 public class CarController {
 
     @Autowired

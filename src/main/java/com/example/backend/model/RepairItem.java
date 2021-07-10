@@ -13,14 +13,18 @@ public class RepairItem {
     private Long id;
 
     private String waterPump;
-    private String exhaustPipe;
-    private String brakePads;
+    private Double waterPumpPrice;
+    private int waterPumpSupply;
     private String brakeDiscs;
-    private String engineFailure;
-    private String smallTurn;
-    private String bigTurn;
+    private Double brakeDiscsPrice;
+    private int brakeDiscsSupply;
+    private String brakePads;
+    private double brakePadsPrice;
+    private int brakePadsSupply;
     private String apkInspection;
+    private Double apkInspectionPrice;
     private String other;
+    private Double otherPrice;
 
     @ManyToOne()
     @JsonBackReference
@@ -42,20 +46,20 @@ public class RepairItem {
         this.waterPump = waterPump;
     }
 
-    public String getExhaustPipe() {
-        return exhaustPipe;
+    public Double getWaterPumpPrice() {
+        return waterPumpPrice;
     }
 
-    public void setExhaustPipe(String exhaustPipe) {
-        this.exhaustPipe = exhaustPipe;
+    public void setWaterPumpPrice(Double waterPumpPrice) {
+        this.waterPumpPrice = waterPumpPrice;
     }
 
-    public String getBrakePads() {
-        return brakePads;
+    public int getWaterPumpSupply() {
+        return waterPumpSupply;
     }
 
-    public void setBrakePads(String brakePads) {
-        this.brakePads = brakePads;
+    public void setWaterPumpSupply(int waterPumpSupply) {
+        this.waterPumpSupply = waterPumpSupply;
     }
 
     public String getBrakeDiscs() {
@@ -66,28 +70,44 @@ public class RepairItem {
         this.brakeDiscs = brakeDiscs;
     }
 
-    public String getEngineFailure() {
-        return engineFailure;
+    public Double getBrakeDiscsPrice() {
+        return brakeDiscsPrice;
     }
 
-    public void setEngineFailure(String engineFailure) {
-        this.engineFailure = engineFailure;
+    public void setBrakeDiscsPrice(Double brakeDiscsPrice) {
+        this.brakeDiscsPrice = brakeDiscsPrice;
     }
 
-    public String getSmallTurn() {
-        return smallTurn;
+    public int getBrakeDiscsSupply() {
+        return brakeDiscsSupply;
     }
 
-    public void setSmallTurn(String smallTurn) {
-        this.smallTurn = smallTurn;
+    public void setBrakeDiscsSupply(int brakeDiscsSupply) {
+        this.brakeDiscsSupply = brakeDiscsSupply;
     }
 
-    public String getBigTurn() {
-        return bigTurn;
+    public String getBrakePads() {
+        return brakePads;
     }
 
-    public void setBigTurn(String bigTurn) {
-        this.bigTurn = bigTurn;
+    public void setBrakePads(String brakePads) {
+        this.brakePads = brakePads;
+    }
+
+    public double getBrakePadsPrice() {
+        return brakePadsPrice;
+    }
+
+    public void setBrakePadsPrice(double brakePadsPrice) {
+        this.brakePadsPrice = brakePadsPrice;
+    }
+
+    public int getBrakePadsSupply() {
+        return brakePadsSupply;
+    }
+
+    public void setBrakePadsSupply(int brakePadsSupply) {
+        this.brakePadsSupply = brakePadsSupply;
     }
 
     public String getApkInspection() {
@@ -98,12 +118,12 @@ public class RepairItem {
         this.apkInspection = apkInspection;
     }
 
-    public RepairJob getRepairJob() {
-        return repairJob;
+    public Double getApkInspectionPrice() {
+        return apkInspectionPrice;
     }
 
-    public void setRepairJob(RepairJob repairJob) {
-        this.repairJob = repairJob;
+    public void setApkInspectionPrice(Double apkInspectionPrice) {
+        this.apkInspectionPrice = apkInspectionPrice;
     }
 
     public String getOther() {
@@ -112,5 +132,21 @@ public class RepairItem {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public Double getOtherPrice() {
+        return otherPrice;
+    }
+
+    public void setOtherPrice(Double otherPrice) {
+        this.otherPrice = otherPrice;
+    }
+
+    public RepairJob getRepairJob() {
+        return repairJob;
+    }
+
+    public void setRepairJob(RepairJob repairJob) {
+        this.repairJob = repairJob;
     }
 }

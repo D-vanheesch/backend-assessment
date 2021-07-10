@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/repair-item")
+@RequestMapping("api/repair-item")
 public class RepairItemController {
 
     @Autowired

@@ -5,7 +5,6 @@ import com.example.backend.model.Car;
 import com.example.backend.model.Customer;
 import com.example.backend.repository.CarRepository;
 import com.example.backend.repository.CustomerRepository;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
