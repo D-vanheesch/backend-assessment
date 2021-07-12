@@ -1,14 +1,18 @@
 package com.example.backend.controller;
 
+import antlr.collections.List;
 import com.example.backend.model.Car;
 import com.example.backend.model.Customer;
 import com.example.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
-@RequestMapping("api/customers")
+@RequestMapping("/api/customers")
 public class CustomerController  {
 
     @Autowired

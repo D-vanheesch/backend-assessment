@@ -1,11 +1,12 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.Customer;
 import com.example.backend.model.RepairJob;
 import com.example.backend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/repair-jobs")
@@ -19,6 +20,7 @@ public class RepairJobController {
         public ResponseEntity<Object> getRepairJob() {
             return ResponseEntity.ok(repairJobService.getRepairJob());
         }
+
         //create employee rest API
         @PostMapping("")
         public ResponseEntity<Object> addRepairJob(@RequestBody RepairJob repairJob) {
@@ -34,7 +36,7 @@ public class RepairJobController {
         }
 
         @GetMapping("/customerAgrees")
-        public RepairJob getRepairJob(@RequestParam String customerAgrees) {
+        public List<RepairJob> getRepairJob(@RequestParam String customerAgrees) {
         return repairJobService.getByCustomerAgrees(customerAgrees);
         }
 
