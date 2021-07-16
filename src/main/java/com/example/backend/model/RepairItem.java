@@ -19,10 +19,8 @@ public class RepairItem {
     private Double brakeDiscsPrice;
     private int brakeDiscsSupply;
     private String brakePads;
-    private double brakePadsPrice;
+    private Double brakePadsPrice;
     private int brakePadsSupply;
-    private String apkInspection;
-    private Double apkInspectionPrice;
     private String other;
     private Double otherPrice;
 
@@ -108,22 +106,6 @@ public class RepairItem {
 
     public void setBrakePadsSupply(int brakePadsSupply) {
         this.brakePadsSupply = brakePadsSupply;
-    }
-
-    public String getApkInspection() {
-        return apkInspection;
-    }
-
-    public void setApkInspection(String apkInspection) {
-        this.apkInspection = apkInspection;
-    }
-
-    public Double getApkInspectionPrice() {
-        return apkInspectionPrice;
-    }
-
-    public void setApkInspectionPrice(Double apkInspectionPrice) {
-        this.apkInspectionPrice = apkInspectionPrice;
     }
 
     public String getOther() {
