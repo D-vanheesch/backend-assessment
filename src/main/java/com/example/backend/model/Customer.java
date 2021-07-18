@@ -18,13 +18,12 @@ public class Customer {
     private String lastName;
     private String residence;
     private String emailAdress;
-    private Integer phoneNumber;
-    private Integer age;
+    private String phoneNumber;
+    private int age;
 
     @OneToOne(mappedBy = "customer")
     @JsonBackReference
     private RepairJob repairJob;
-
 
     public long getId() {
         return id;
@@ -66,11 +65,11 @@ public class Customer {
         this.emailAdress = emailAdress;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

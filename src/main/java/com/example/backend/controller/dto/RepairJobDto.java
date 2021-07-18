@@ -74,5 +74,4 @@ public class RepairJobDto {
     public void setRepairStatus(String actions) {
         this.repairStatus = actions;
     }
-
 }
