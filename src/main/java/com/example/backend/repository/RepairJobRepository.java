@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface RepairJobRepository extends JpaRepository<RepairJob, Long> {
 
-    List<RepairJob> findRepairJobByCustomerAgrees(String customerAgrees);
+    List<RepairJob> findRepairJobsByRepairStatus(String repairStatus);
+
+    List<RepairJob> findRepairJobsByCustomerAgrees(String customerAgrees);
 }

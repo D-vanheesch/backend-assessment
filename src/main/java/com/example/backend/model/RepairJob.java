@@ -28,7 +28,7 @@ public class RepairJob {
 
     @OneToMany(mappedBy = "repairJob")
     @JsonManagedReference
-    private List<RepairItem> repairItems;
+    private List<RepairItem> repairItem;
 
     public Long getId() {
         return id;
@@ -70,11 +70,11 @@ public class RepairJob {
         this.customer = customer;
     }
 
-    public List<RepairItem> getRepairItems() {
-        return repairItems;
+    public List<RepairItem> getRepairItem() {
+        return repairItem;
     }
 
-    public void setRepairItems(List<RepairItem> repairItems) {
-        this.repairItems = repairItems;
+    public void setRepairItem(List<RepairItem> repairItem) {
+        this.repairItem = repairItem;
     }
 }

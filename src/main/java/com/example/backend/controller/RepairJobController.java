@@ -1,11 +1,15 @@
 package com.example.backend.controller;
 
+import com.example.backend.controller.dto.CustomerDto;
+import com.example.backend.controller.dto.RepairJobDto;
 import com.example.backend.model.RepairJob;
+import com.example.backend.repository.RepairItemRepository;
 import com.example.backend.service.RepairJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,6 +19,9 @@ public class RepairJobController {
     @Autowired
     private RepairJobService repairJobService;
 
+    @Autowired
+    private RepairItemRepository repairItemRepository;
+
         //krijgt verzoek binnen
         @GetMapping("")
         public ResponseEntity<Object> getRepairJob() {
@@ -23,8 +30,8 @@ public class RepairJobController {
 
         //create employee rest API
         @PostMapping("")
-        public ResponseEntity<Object> addRepairJob(@RequestBody RepairJob repairJob) {
-            repairJobService.addRepairJob(repairJob);
+        public ResponseEntity<Object> addRepairJob(@RequestBody RepairJobDto repairJobDto) {
+            repairJobService.addRepairJob(repairJobDto);
             return ResponseEntity.ok("Added");
         }
         //get 1 employee
@@ -36,12 +43,32 @@ public class RepairJobController {
         }
 
         @GetMapping("/customerAgrees")
-        public List<RepairJob> getRepairJob(@RequestParam String customerAgrees) {
-        return repairJobService.getByCustomerAgrees(customerAgrees);
+        public List<CustomerDto> getByCustomerAgrees(@RequestParam String customerAgrees) {
+
+            var repairjobs = repairJobService.getByCustomerAgrees(customerAgrees);
+            var phonenumbers = new ArrayList<CustomerDto>();
+            for (int i = 0; i < repairjobs.size(); i++) {
+                var dto =  CustomerDto.fromCustomer(repairjobs.get(i).getCustomer());
+                phonenumbers.add(dto);
+            }
+            return phonenumbers;
         }
+
+    @GetMapping("/repairStatus")
+    public ArrayList<RepairJobDto> getByRepairStatus (@RequestParam String repairStatus){
+
+        var repairjobs = repairJobService.getByRepairStatus(repairStatus);
+        var repairStatusCheck = new ArrayList<RepairJobDto>();
+        for (int i = 0; i < repairjobs.size(); i++) {
+            var dto = RepairJobDto.fromRepairStatus(repairjobs.get(i).getCustomer().getRepairJob());
+            repairStatusCheck.add(dto);
+        }
+        return repairStatusCheck;
+    }
 
         @PutMapping("/{id}")
         public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob updateRepairJob) {
+            System.out.println(updateRepairJob);
             repairJobService.updateRepairJob(id, updateRepairJob);
             return ResponseEntity.noContent().build();
         }
