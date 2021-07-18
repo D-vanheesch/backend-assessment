@@ -10,7 +10,6 @@ public interface CustomerService {
     void removeCustomer(long id);
     void updateCustomer(long id, Customer customer);
 
-    //query uitbreiding
     Customer getByFirstName(String firstname);
     Customer getByPhoneNumber(Integer phoneNumber);
 

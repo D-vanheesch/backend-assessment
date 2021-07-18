@@ -1,6 +1,5 @@
 package com.example.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -23,7 +22,6 @@ public class RepairJob {
     @OneToOne
     @Cascade(CascadeType.ALL)
     @JsonManagedReference
-    //gaat de loop tegen om van customer nog een Json te maken.
     private Customer customer;
 
     @OneToMany(mappedBy = "repairJob")

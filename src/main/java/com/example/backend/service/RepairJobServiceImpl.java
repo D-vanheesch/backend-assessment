@@ -64,8 +64,6 @@ public class RepairJobServiceImpl implements RepairJobService {
         repairJob.setCustomerAgrees(repairJobDto.getCustomerAgrees());
         repairJob.setRepairStatus(repairJobDto.getRepairStatus());
         Customer customer = customerRepository.findById(repairJobDto.getCustomerId()).orElse(null);
-
-        //Customer should only have one RepairJob
         if (customer.getRepairJob()!=null) throw new BadRequestException();
         repairJob.setCustomer(customer);
         repairJob =  repairJobRepository.save(repairJob);

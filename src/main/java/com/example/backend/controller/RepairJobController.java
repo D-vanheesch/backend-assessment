@@ -22,20 +22,17 @@ public class RepairJobController {
     @Autowired
     private RepairItemRepository repairItemRepository;
 
-        //krijgt verzoek binnen
         @GetMapping("")
         public ResponseEntity<Object> getRepairJob() {
             return ResponseEntity.ok(repairJobService.getRepairJob());
         }
 
-        //create employee rest API
         @PostMapping("")
         public ResponseEntity<Object> addRepairJob(@RequestBody RepairJobDto repairJobDto) {
             repairJobService.addRepairJob(repairJobDto);
             return ResponseEntity.ok("Added");
         }
-        //get 1 employee
-        //krijgt verzoek binnen
+
         @GetMapping("/{id}")
         public ResponseEntity<Object> getRepairJob(@PathVariable("id") long id) {
             RepairJob repairJob = repairJobService.getRepairJob(id);
@@ -68,7 +65,6 @@ public class RepairJobController {
 
         @PutMapping("/{id}")
         public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob updateRepairJob) {
-            System.out.println(updateRepairJob);
             repairJobService.updateRepairJob(id, updateRepairJob);
             return ResponseEntity.noContent().build();
         }

@@ -25,7 +25,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource);
-
     }
 
     @Bean
@@ -33,12 +32,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    // Secure the endpoints with HTTP Basic authentication
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
-                //HTTP Basic authentication
                 .httpBasic()
                 .and()
                 .authorizeRequests()
@@ -57,7 +54,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/cars/**").hasAnyRole("ADMINISTRATION", "ADMIN")
                 .antMatchers("/api/file-upload/**").hasAnyRole("ADMINISTRATION", "ADMIN")
 
-
                 .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/authenticated/**").authenticated()
                 .anyRequest().permitAll()
@@ -65,7 +61,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().disable();
 
-        // add this line to use H2 web console
         httpSecurity.headers().frameOptions().disable();
     }
 

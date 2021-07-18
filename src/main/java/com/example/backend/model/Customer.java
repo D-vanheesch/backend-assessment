@@ -9,8 +9,6 @@ import javax.persistence.*;
 @RestController
 public class Customer {
 
-    // attributen
-    //Column te gebruiken voor custom namen van je tabel
     @Id
     @GeneratedValue
     private long id;

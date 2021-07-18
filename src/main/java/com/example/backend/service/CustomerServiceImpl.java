@@ -1,17 +1,13 @@
 package com.example.backend.service;
 
 import com.example.backend.exception.RecordNotFoundException;
-import com.example.backend.model.Car;
 import com.example.backend.model.Customer;
-import com.example.backend.repository.CarRepository;
 import com.example.backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-//complexere stukken van je app, zet in je service
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -21,12 +17,10 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-//    private List<Customer> customers = new ArrayList<>();
 
     @Override
         public List<Customer> getCustomers() {
          return customerRepository.findAll();
-//        return customers;
    }
 
    @Override
@@ -58,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
                throw new RecordNotFoundException("Customer does not exist");
            }
         }
-    //query search
+
     @Override
     public Customer getByFirstName(String firstname) {
         Optional<Customer> optionalCustomer = customerRepository.findCustomerByFirstName(firstname);
