@@ -2,7 +2,6 @@ package com.example.backend.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table
 public class FileUpload {
