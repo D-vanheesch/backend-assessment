@@ -63,4 +63,7 @@ public class FileUpload {
     public void setFileLocation(String fileLocation) {
         this.fileLocation = fileLocation;
     }
+
+    public void setLocation(String toString) {
+    }
 }

@@ -2,8 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.FileUpload;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.annotation.Resource;
+import org.springframework.core.io.Resource;
 
 public interface FileUploadService {
 
