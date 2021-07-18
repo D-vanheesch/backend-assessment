@@ -11,6 +11,5 @@ public interface FileUploadService {
     boolean fileExistsById(long id);
     long uploadFile(MultipartFile file);
     void deleteFile(long id);
-
     Resource downloadFile(long id);
 }

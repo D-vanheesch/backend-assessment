@@ -5,7 +5,6 @@ import com.example.backend.model.RepairItem;
 import com.example.backend.repository.RepairItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -35,9 +34,9 @@ public class RepairItemServiceImpl implements RepairItemService {
     }
     @Override
     public RepairItem addRepairItem (RepairItem repairItem){
-
         return repairItemRepository.save(repairItem);
     }
+
     @Override
     public void removeRepairItem ( long id){
         repairItemRepository.deleteById(id);

@@ -3,7 +3,7 @@ package com.example.backend.controller.dto;
 import com.example.backend.model.Customer;
 
 public class CustomerDto {
-    public Integer phoneNumber;
+    public String phoneNumber;
     public String firstName;
     public String lastName;
 

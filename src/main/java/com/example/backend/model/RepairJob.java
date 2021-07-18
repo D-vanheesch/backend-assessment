@@ -2,6 +2,7 @@ package com.example.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,19 +17,16 @@ public class RepairJob {
 
     private String examination;
     private String customerAgrees;
-    private String actions;
-
-    @ManyToOne
-    private Car car;
+    private String repairStatus;
 
     @OneToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    //gaat de loop tegen om van customer nog een Json te maken.
-
+    @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private Customer customer;
 
     @OneToMany(mappedBy = "repairJob")
-    private List<RepairItem> repairItems;
+    @JsonManagedReference
+    private List<RepairItem> repairItem;
 
     public Long getId() {
         return id;
@@ -46,14 +44,6 @@ public class RepairJob {
         this.examination = examination;
     }
 
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
     public String getCustomerAgrees() {
         return customerAgrees;
     }
@@ -62,20 +52,12 @@ public class RepairJob {
         this.customerAgrees = customerAgrees;
     }
 
-    public String getActions() {
-        return actions;
+    public String getRepairStatus() {
+        return repairStatus;
     }
 
-    public void setActions(String actions) {
-        this.actions = actions;
-    }
-
-    public List<RepairItem> getRepairItems() {
-        return repairItems;
-    }
-
-    public void setRepairItems(List<RepairItem> repairItems) {
-        this.repairItems = repairItems;
+    public void setRepairStatus(String repairStatus) {
+        this.repairStatus = repairStatus;
     }
 
     public Customer getCustomer() {
@@ -84,5 +66,13 @@ public class RepairJob {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<RepairItem> getRepairItem() {
+        return repairItem;
+    }
+
+    public void setRepairItem(List<RepairItem> repairItem) {
+        this.repairItem = repairItem;
     }
 }

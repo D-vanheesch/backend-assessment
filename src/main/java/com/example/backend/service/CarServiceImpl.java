@@ -8,7 +8,6 @@ import com.example.backend.repository.CarRepository;
 import com.example.backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public class CarServiceImpl implements CarService {
     public CarServiceImpl(CarRepository customerRepository) {
         this.carRepository = customerRepository;
     }
-    //    private List<Customer> customers = new ArrayList<>();
+
     @Autowired
     private CustomerRepository customerRepository;
 

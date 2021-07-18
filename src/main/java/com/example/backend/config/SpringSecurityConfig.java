@@ -25,7 +25,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource);
-
     }
 
     @Bean
@@ -33,30 +32,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    // Secure the endpoints with HTTP Basic authentication
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
-                //HTTP Basic authentication
                 .httpBasic()
                 .and()
                 .authorizeRequests()
                 //mechanic
                 .antMatchers("/api/repair-jobs/**").hasAnyRole("MECHANIC", "ADMIN")
-                .antMatchers("/api/repair-item/**").hasAnyRole("MECHANIC", "ADMIN")
+                .antMatchers("/api/repair-items/**").hasAnyRole("MECHANIC", "ADMIN")
 
                 //frontdesk
-                .antMatchers("/api/repair-item/**").hasAnyRole("FRONTDESK", "ADMIN")
+                .antMatchers("/api/repair-items/**").hasAnyRole("FRONTDESK", "ADMIN")
 
                 //backoffice
-                .antMatchers("/api/repair-item/**").hasAnyRole("BACKOFFICE", "ADMIN")
+                .antMatchers("/api/repair-items/**").hasAnyRole("BACKOFFICE", "ADMIN")
 
                 //administration
                 .antMatchers("/api/customers/**").hasAnyRole("ADMINISTRATION", "ADMIN")
                 .antMatchers("/api/cars/**").hasAnyRole("ADMINISTRATION", "ADMIN")
                 .antMatchers("/api/file-upload/**").hasAnyRole("ADMINISTRATION", "ADMIN")
-
 
                 .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/authenticated/**").authenticated()
@@ -65,7 +61,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().disable();
 
-        // add this line to use H2 web console
         httpSecurity.headers().frameOptions().disable();
     }
 

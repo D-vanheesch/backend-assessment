@@ -1,7 +1,6 @@
 package com.example.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,16 +12,23 @@ public class RepairItem {
     private Long id;
 
     private String waterPump;
-    private Double waterPumpPrice;
-    private int waterPumpSupply;
+    private Integer waterPumpPrice;
+    private Integer waterPumpSupply;
+    private String repairWaterPump;
+    private String engine;
+    private Integer enginePrice;
+    private Integer engineSupply;
+    private String repairEngine;
     private String brakeDiscs;
-    private Double brakeDiscsPrice;
-    private int brakeDiscsSupply;
+    private Integer brakeDiscsPrice;
+    private Integer brakeDiscsSupply;
+    private String repairBrakeDiscs;
     private String brakePads;
-    private Double brakePadsPrice;
-    private int brakePadsSupply;
+    private Integer brakePadsPrice;
+    private Integer brakePadsSupply;
+    private String repairBrakePads;
     private String other;
-    private Double otherPrice;
+    private Integer otherPrice;
 
     @ManyToOne()
     @JsonBackReference
@@ -44,20 +50,60 @@ public class RepairItem {
         this.waterPump = waterPump;
     }
 
-    public Double getWaterPumpPrice() {
+    public Integer getWaterPumpPrice() {
         return waterPumpPrice;
     }
 
-    public void setWaterPumpPrice(Double waterPumpPrice) {
+    public void setWaterPumpPrice(Integer waterPumpPrice) {
         this.waterPumpPrice = waterPumpPrice;
     }
 
-    public int getWaterPumpSupply() {
+    public Integer getWaterPumpSupply() {
         return waterPumpSupply;
     }
 
-    public void setWaterPumpSupply(int waterPumpSupply) {
+    public void setWaterPumpSupply(Integer waterPumpSupply) {
         this.waterPumpSupply = waterPumpSupply;
+    }
+
+    public String getRepairWaterPump() {
+        return repairWaterPump;
+    }
+
+    public void setRepairWaterPump(String repairWaterPump) {
+        this.repairWaterPump = repairWaterPump;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    public Integer getEnginePrice() {
+        return enginePrice;
+    }
+
+    public void setEnginePrice(Integer enginePrice) {
+        this.enginePrice = enginePrice;
+    }
+
+    public Integer getEngineSupply() {
+        return engineSupply;
+    }
+
+    public void setEngineSupply(Integer engineSupply) {
+        this.engineSupply = engineSupply;
+    }
+
+    public String getRepairEngine() {
+        return repairEngine;
+    }
+
+    public void setRepairEngine(String repairEngine) {
+        this.repairEngine = repairEngine;
     }
 
     public String getBrakeDiscs() {
@@ -68,20 +114,28 @@ public class RepairItem {
         this.brakeDiscs = brakeDiscs;
     }
 
-    public Double getBrakeDiscsPrice() {
+    public Integer getBrakeDiscsPrice() {
         return brakeDiscsPrice;
     }
 
-    public void setBrakeDiscsPrice(Double brakeDiscsPrice) {
+    public void setBrakeDiscsPrice(Integer brakeDiscsPrice) {
         this.brakeDiscsPrice = brakeDiscsPrice;
     }
 
-    public int getBrakeDiscsSupply() {
+    public Integer getBrakeDiscsSupply() {
         return brakeDiscsSupply;
     }
 
-    public void setBrakeDiscsSupply(int brakeDiscsSupply) {
+    public void setBrakeDiscsSupply(Integer brakeDiscsSupply) {
         this.brakeDiscsSupply = brakeDiscsSupply;
+    }
+
+    public String getRepairBrakeDiscs() {
+        return repairBrakeDiscs;
+    }
+
+    public void setRepairBrakeDiscs(String repairBrakeDiscs) {
+        this.repairBrakeDiscs = repairBrakeDiscs;
     }
 
     public String getBrakePads() {
@@ -92,20 +146,28 @@ public class RepairItem {
         this.brakePads = brakePads;
     }
 
-    public double getBrakePadsPrice() {
+    public Integer getBrakePadsPrice() {
         return brakePadsPrice;
     }
 
-    public void setBrakePadsPrice(double brakePadsPrice) {
+    public void setBrakePadsPrice(Integer brakePadsPrice) {
         this.brakePadsPrice = brakePadsPrice;
     }
 
-    public int getBrakePadsSupply() {
+    public Integer getBrakePadsSupply() {
         return brakePadsSupply;
     }
 
-    public void setBrakePadsSupply(int brakePadsSupply) {
+    public void setBrakePadsSupply(Integer brakePadsSupply) {
         this.brakePadsSupply = brakePadsSupply;
+    }
+
+    public String getRepairBrakePads() {
+        return repairBrakePads;
+    }
+
+    public void setRepairBrakePads(String repairBrakePads) {
+        this.repairBrakePads = repairBrakePads;
     }
 
     public String getOther() {
@@ -116,11 +178,11 @@ public class RepairItem {
         this.other = other;
     }
 
-    public Double getOtherPrice() {
+    public Integer getOtherPrice() {
         return otherPrice;
     }
 
-    public void setOtherPrice(Double otherPrice) {
+    public void setOtherPrice(Integer otherPrice) {
         this.otherPrice = otherPrice;
     }
 
