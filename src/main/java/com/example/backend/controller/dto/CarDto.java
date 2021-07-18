@@ -1,31 +1,17 @@
-package com.example.backend.model;
+package com.example.backend.controller.dto;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import javax.persistence.*;
-
-@Entity
-@Table (name = "cars")
-public class Car {
-
-    @Id
-    @GeneratedValue
-    private long id;
-
+public class CarDto {
+    private long customerId;
     private String licensePlate;
     private String dayOfCarCheck;
     private String dayOfRepairJob;
 
-    @OneToOne
-    @Cascade(CascadeType.ALL)
-    private Customer customer;
-
-    public long getId() {
-        return id;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public String getLicensePlate() {
@@ -50,13 +36,5 @@ public class Car {
 
     public void setDayOfRepairJob(String dayOfRepairJob) {
         this.dayOfRepairJob = dayOfRepairJob;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 }
