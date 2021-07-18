@@ -5,7 +5,6 @@ import java.util.List;
 
 public interface CustomerService {
     List<Customer> getCustomers();
-
     Customer getCustomer(long id);
     Customer addCustomer(Customer customer);
     void removeCustomer(long id);
@@ -13,6 +12,6 @@ public interface CustomerService {
 
     //query uitbreiding
     Customer getByFirstName(String firstname);
-//    Customer getByPhoneNumber(Integer phoneNumber);
+    Customer getByPhoneNumber(Integer phoneNumber);
 
 }

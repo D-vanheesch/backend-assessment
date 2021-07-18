@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.controller.dto.CarDto;
 import com.example.backend.model.Car;
 import com.example.backend.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ public class CarController {
 
     @Autowired
     private CarService carService;
+
     //krijgt verzoek binnen
     @GetMapping("")
     public ResponseEntity<Object> getCar() {
@@ -19,10 +21,11 @@ public class CarController {
     }
     //create employee rest API
     @PostMapping("")
-    public ResponseEntity<Object> addCar(@RequestBody Car car) {
-        carService.addCar(car);
+    public ResponseEntity<Object> addCar(@RequestBody CarDto carDto) {
+        carService.addCar(carDto);
         return ResponseEntity.ok("Added");
     }
+
     //get 1 employee
     //krijgt verzoek binnen
     @GetMapping("/{id}")
@@ -30,12 +33,14 @@ public class CarController {
         Car car = carService.getCar(id);
         return ResponseEntity.ok(car);
     }
+
     //query to search on firstname (customers/firstname?firstname=David
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateCar(@PathVariable("id") long id, @RequestBody Car updateCar) {
         carService.updateCar(id, updateCar);
         return ResponseEntity.noContent().build();
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> removeCar(@PathVariable("id") long id) {
         carService.removeCar(id);

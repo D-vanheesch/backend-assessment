@@ -1,14 +1,15 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.Car;
 import com.example.backend.model.Customer;
 import com.example.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RestController
-@RequestMapping("api/customers")
+@RequestMapping("/api/customers")
 public class CustomerController  {
 
     @Autowired
@@ -51,18 +52,6 @@ public class CustomerController  {
         customerService.removeCustomer(id);
             return ResponseEntity.noContent().build().ok("Deleted");
         }
-
-        //koppeling car met customer
-//    @GetMapping("/car")
-//    public Customer getCustomerById(@RequestParam("id") String id) {
-//        return customerService.getByF(id);
-//    }
-
-//
-//    @GetMapping("/phonenumber")
-//    public Customer getCustomer (@RequestParam Integer phonenumber) {
-//        return customerService.getByPhoneNumber(phonenumber);
-//    }
     }
 
 

@@ -53,10 +53,10 @@ public class RepairJobServiceImpl implements RepairJobService {
     }
 
     @Override
-    public RepairJob getByCustomerAgrees(String customerAgrees) {
-        Optional<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobByCustomerAgrees(customerAgrees);
-        if (optionalRepairJob.isPresent()) {
-            return optionalRepairJob.get();
+    public List<RepairJob> getByCustomerAgrees(String customerAgrees) {
+        List<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobByCustomerAgrees(customerAgrees);
+        if (optionalRepairJob != null) {
+            return optionalRepairJob;
         } else {
             throw new RecordNotFoundException("Repair-job does not exist");
         }

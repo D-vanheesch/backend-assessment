@@ -16,13 +16,10 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
-    private CarRepository carRepository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository, CarRepository carRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.carRepository = carRepository;
-
     }
 //    private List<Customer> customers = new ArrayList<>();
 
@@ -35,11 +32,10 @@ public class CustomerServiceImpl implements CustomerService {
    @Override
    public Customer getCustomer ( long id) {
         Optional<Customer> customer = customerRepository.findById(id);
-
         if (customer.isPresent()) {
             return customer.get();
         } else {
-            throw new RecordNotFoundException("Person does not exist");
+            throw new RecordNotFoundException("Customer does not exist");
         }
     }
 
@@ -59,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
            if (optionalCustomer.isPresent()) {
                customerRepository.save(updateCustomer);
            } else {
-               throw new RecordNotFoundException("Person does not exist");
+               throw new RecordNotFoundException("Customer does not exist");
            }
         }
     //query search
@@ -69,26 +65,17 @@ public class CustomerServiceImpl implements CustomerService {
         if (optionalCustomer.isPresent()) {
             return optionalCustomer.get();
         } else {
-            throw new RecordNotFoundException("Person does not exist");
+            throw new RecordNotFoundException("Customer does not exist");
         }
     }
 
-    //koppeling car met customer??
-//   @Override
-//    public Customer findByCarId (String id) {
-//        return customerRepository.findByCarId(id);
-//    }
-
-//    @Override
-//    public Customer setCustomerCar(String customerId, String carId) {
-//        var customer = customerRepository.findCustomerById(customerId);
-//        var car = carRepository.findCarById(carId);
-//
-//        if (customer.isPresent() && car.isPresent()) {
-//            customer.get().setCar(car.get());
-//            return customerRepository.save(customer.get());
-//        } else {
-//           throw new NotFoundException("Customer does not exist");
-//        }
-//    }
+    @Override
+    public Customer getByPhoneNumber(Integer phoneNumber) {
+        Optional<Customer> optionalCustomer = customerRepository.findCustomerByPhoneNumber(phoneNumber);
+        if (optionalCustomer.isPresent()) {
+            return optionalCustomer.get();
+        } else {
+            throw new RecordNotFoundException("Phonenumber does not excist");
+        }
+    }
 }

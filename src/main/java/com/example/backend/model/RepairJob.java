@@ -24,7 +24,7 @@ public class RepairJob {
     @OneToOne
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     //gaat de loop tegen om van customer nog een Json te maken.
-    @JsonManagedReference
+
     private Customer customer;
 
     @OneToMany(mappedBy = "repairJob")
