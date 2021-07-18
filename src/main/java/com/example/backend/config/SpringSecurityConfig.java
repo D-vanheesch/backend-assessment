@@ -44,18 +44,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //mechanic
                 .antMatchers("/api/repair-jobs/**").hasAnyRole("MECHANIC", "ADMIN")
-                .antMatchers("/api/repair-items/**").hasAnyRole("MECHANIC", "ADMIN")
+                .antMatchers("/api/repair-item/**").hasAnyRole("MECHANIC", "ADMIN")
 
                 //frontdesk
-                .antMatchers("/api/repair-items/**").hasAnyRole("FRONTDESK", "ADMIN")
+                .antMatchers("/api/repair-item/**").hasAnyRole("FRONTDESK", "ADMIN")
 
                 //backoffice
-                .antMatchers("/api/repair-items/**").hasAnyRole("BACKOFFICE", "ADMIN")
+                .antMatchers("/api/repair-item/**").hasAnyRole("BACKOFFICE", "ADMIN")
 
                 //administration
-                .antMatchers("/api/customer/**").hasAnyRole("ADMINISTRATION", "ADMIN")
+                .antMatchers("/api/customers/**").hasAnyRole("ADMINISTRATION", "ADMIN")
                 .antMatchers("/api/cars/**").hasAnyRole("ADMINISTRATION", "ADMIN")
-                .antMatchers("/api/files/**").hasAnyRole("ADMINISTRATION", "ADMIN")
+                .antMatchers("/api/file-upload/**").hasAnyRole("ADMINISTRATION", "ADMIN")
 
 
                 .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
