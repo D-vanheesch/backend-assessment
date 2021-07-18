@@ -7,17 +7,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/repair-item")
+@RequestMapping("api/repair-items")
 public class RepairItemController {
 
     @Autowired
     private RepairItemService repairItemService;
     //krijgt verzoek binnen
+
     @GetMapping("")
     public ResponseEntity<Object> getRepairItem() {
         return ResponseEntity.ok(repairItemService.getRepairItem());
     }
     //create employee rest API
+
     @PostMapping("")
     public ResponseEntity<Object> addCar(@RequestBody RepairItem repairItem) {
         repairItemService.addRepairItem(repairItem);
