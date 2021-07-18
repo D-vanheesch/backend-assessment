@@ -1,10 +1,6 @@
 package com.example.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.*;
 
@@ -24,12 +20,6 @@ public class Customer {
     private String emailAdress;
     private Integer phoneNumber;
     private Integer age;
-
-    @OneToOne
-    @Cascade(CascadeType.ALL)
-    //gaat de loop tegen om van customer nog een Json te maken.
-    @JsonManagedReference
-    private Car car;
 
     @OneToOne(mappedBy = "customer")
     @JsonBackReference
@@ -58,14 +48,6 @@ public class Customer {
 
     public void setSecondName(String secondName) {
         this.lastName = secondName;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
     }
 
     public String getResidence() {
