@@ -1,31 +1,28 @@
 package com.example.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table (name = "car")
+@Table (name = "cars")
 public class Car {
 
     @Id
     @GeneratedValue
     private long id;
+
     private String licensePlate;
-    private String brand;
-    private Integer carCustomerId;
+    private String dayOfCarCheck;
+    private String dayOfRepairJob;
 
-    public Car () {
-        System.out.println(carCustomerId);
-        System.out.println("test");
-    }
+    @OneToOne(mappedBy = "car")
+    @JsonBackReference
+    private Customer customer;
 
-    public Car(String licensePlate, String brand, Integer carCustomerId) {
-        this.licensePlate = licensePlate;
-        this.brand = brand;
-        this.carCustomerId = carCustomerId;
-    }
+    @OneToMany(mappedBy = "car")
+    private List<RepairJob> repairJobs;
 
     public long getId() {
         return id;
@@ -43,20 +40,35 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getDayOfCarCheck() {
+        return dayOfCarCheck;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setDayOfCarCheck(String dayOfCarCheck) {
+        this.dayOfCarCheck = dayOfCarCheck;
     }
 
-    public Integer getCarCustomerId() {
-        System.out.println(carCustomerId);
-            return carCustomerId;
+    public String getDayOfRepairJob() {
+        return dayOfRepairJob;
     }
 
-    public void setCarCustomerId(Integer carCustomerId) {
-        this.carCustomerId = carCustomerId;
+    public void setDayOfRepairJob(String dayOfRepairJob) {
+        this.dayOfRepairJob = dayOfRepairJob;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<RepairJob> getRepairJobs() {
+        return repairJobs;
+    }
+
+    public void setRepairJobs(List<RepairJob> repairJobs) {
+        this.repairJobs = repairJobs;
     }
 }

@@ -1,17 +1,14 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.Car;
 import com.example.backend.model.Customer;
-import com.example.backend.repository.CustomerRepository;
 import com.example.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("api/customers")
 public class CustomerController  {
 
     @Autowired
@@ -30,12 +27,17 @@ public class CustomerController  {
         return ResponseEntity.ok("Added");
     }
 
-    //get all the employees
+    //get 1 employee
     //krijgt verzoek binnen
     @GetMapping("/{id}")
     public ResponseEntity<Object> getCustomers(@PathVariable("id") long id) {
         Customer customer = customerService.getCustomer(id);
             return ResponseEntity.ok(customer);
+    }
+//query to search on firstname (customers/firstname?firstname=David
+    @GetMapping("/firstname")
+    public Customer getCustomer(@RequestParam String firstname) {
+        return customerService.getByFirstName(firstname);
     }
 
     @PutMapping("/{id}")
@@ -47,8 +49,20 @@ public class CustomerController  {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> removeCustomer(@PathVariable("id") long id) {
         customerService.removeCustomer(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build().ok("Deleted");
         }
+
+        //koppeling car met customer
+//    @GetMapping("/car")
+//    public Customer getCustomerById(@RequestParam("id") String id) {
+//        return customerService.getByF(id);
+//    }
+
+//
+//    @GetMapping("/phonenumber")
+//    public Customer getCustomer (@RequestParam Integer phonenumber) {
+//        return customerService.getByPhoneNumber(phonenumber);
+//    }
     }
 
 

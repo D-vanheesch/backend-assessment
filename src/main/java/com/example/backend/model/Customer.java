@@ -1,9 +1,11 @@
 package com.example.backend.model;
 
-//domein klasses
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,31 +14,27 @@ import javax.persistence.*;
 public class Customer {
 
     // attributen
+    //Column te gebruiken voor custom namen van je tabel
     @Id
     @GeneratedValue
     private long id;
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String residence;
     private String emailAdress;
-    private String carPapers;
+    private Integer phoneNumber;
     private Integer age;
 
-    public Customer () {
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    //gaat de loop tegen om van customer nog een Json te maken.
+    @JsonManagedReference
+    private Car car;
 
-    }
+    @OneToOne(mappedBy = "customer")
+    @JsonBackReference
+    private RepairJob repairJob;
 
-    //generate constructer
-    public Customer(String firstName, String secondName, String residence, String emailAdress, String carPapers, Integer age) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.residence = residence;
-        this.emailAdress = emailAdress;
-        this.carPapers = carPapers;
-        this.age = age;
-    }
-
-    // setters en getters
 
     public long getId() {
         return id;
@@ -54,12 +52,20 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = secondName;
+        this.lastName = secondName;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public String getResidence() {
@@ -78,12 +84,12 @@ public class Customer {
         this.emailAdress = emailAdress;
     }
 
-    public String getCarPapers() {
-        return carPapers;
+    public Integer getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setCarPapers(String carPapers) {
-        this.carPapers = carPapers;
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getAge() {
@@ -94,4 +100,11 @@ public class Customer {
         this.age = age;
     }
 
+    public RepairJob getRepairJob() {
+        return repairJob;
+    }
+
+    public void setRepairJob(RepairJob repairJob) {
+        this.repairJob = repairJob;
+    }
 }
