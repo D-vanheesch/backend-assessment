@@ -1,8 +1,11 @@
 package com.example.backend.service;
 
+import com.example.backend.controller.dto.CarDto;
 import com.example.backend.exception.RecordNotFoundException;
 import com.example.backend.model.Car;
+import com.example.backend.model.Customer;
 import com.example.backend.repository.CarRepository;
+import com.example.backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ public class CarServiceImpl implements CarService {
         this.carRepository = customerRepository;
     }
     //    private List<Customer> customers = new ArrayList<>();
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
     public List<Car> getCar() {
@@ -33,11 +38,18 @@ public class CarServiceImpl implements CarService {
             throw new RecordNotFoundException("Car does not exist");
         }
     }
-    @Override
-    public Car addCar (Car car){
 
+    @Override
+    public Car addCar (CarDto carDto){
+        Car car = new Car();
+        car.setLicensePlate(carDto.getLicensePlate());
+        car.setDayOfCarCheck(carDto.getDayOfCarCheck());
+        car.setDayOfRepairJob(carDto.getDayOfRepairJob());
+        Customer customer = customerRepository.findById(carDto.getCustomerId()).orElse(null);
+        car.setCustomer(customer);
         return carRepository.save(car);
     }
+
     @Override
     public void removeCar ( long id){
         carRepository.deleteById(id);
