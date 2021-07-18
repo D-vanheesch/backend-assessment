@@ -45,6 +45,7 @@ public class RepairJobController {
             repairJobService.updateRepairJob(id, updateRepairJob);
             return ResponseEntity.noContent().build();
         }
+
         @DeleteMapping("/{id}")
         public ResponseEntity<Object> removeRepairJob (@PathVariable("id") long id) {
             repairJobService.removeRepairJob(id);

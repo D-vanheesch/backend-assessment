@@ -42,11 +42,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                //admin
-                .antMatchers(HttpMethod.GET, "/api/**").hasRole("ADMIN")
-
                 //mechanic
-                .antMatchers(HttpMethod.GET, "/api/repair-jobs/**").hasRole("MECHANIC")
+                .antMatchers("/api/v1/repair-jobs/**").hasAnyRole("MECHANIC", "ADMIN")
+                .antMatchers("/api/v1/repair-items/**").hasAnyRole("MECHANIC", "ADMIN")
+
+                //frontdesk
+                .antMatchers("/api/v1/repair-items/**").hasAnyRole("FRONTDESK", "ADMIN")
+
+                //backoffice
+                .antMatchers("/api/v1/repair-items/**").hasAnyRole("BACKOFFICE", "ADMIN")
+
+                //administration
+                .antMatchers("/api/v1/customer/**").hasAnyRole("ADMINISTRATION", "ADMIN")
+                .antMatchers("/api/v1/cars/**").hasAnyRole("ADMINISTRATION", "ADMIN")
+                .antMatchers("/api/v1/files/**").hasAnyRole("ADMINISTRATION", "ADMIN")
+
+
                 .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/authenticated/**").authenticated()
                 .anyRequest().permitAll()
