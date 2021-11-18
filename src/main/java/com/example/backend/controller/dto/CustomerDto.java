@@ -7,6 +7,13 @@ public class CustomerDto {
     public String firstName;
     public String lastName;
 
+    /**
+     * Get customer information
+     *
+     * @param customer object attached to customer
+     *
+     * @return null || object dto
+     */
     public static CustomerDto fromCustomer(Customer customer) {
         if (customer == null) return null;
         var dto = new CustomerDto();

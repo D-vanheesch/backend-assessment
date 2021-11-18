@@ -20,6 +20,8 @@ public class Car {
     @Cascade(CascadeType.ALL)
     private Customer customer;
 
+    //getters and setters
+
     public long getId() {
         return id;
     }

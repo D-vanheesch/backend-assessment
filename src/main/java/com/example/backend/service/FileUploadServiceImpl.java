@@ -23,16 +23,35 @@ import java.util.Optional;
 public class FileUploadServiceImpl implements FileUploadService {
     private FileUploadRepository fileUploadRepository;
 
+    /**
+     * Define fileUpLoad repository with fileUpLoad repository
+     *
+     * @param fileUploadRepository object to define fileUpLoadRepository
+     */
     @Autowired
     public FileUploadServiceImpl(FileUploadRepository fileUploadRepository) {
         this.fileUploadRepository = fileUploadRepository;
     }
 
+
+    /**
+     * Get all files
+     *
+     * @return fileUploadRepository.findAll()
+     */
     @Override
     public Iterable<FileUpload> getFiles() {
         return fileUploadRepository.findAll();
     }
 
+    /**
+     * Upload new file and return insertion id
+     *
+     * @param file file contents to upload
+     *
+     * @return storedFile.getId()
+     * @throws FileStorageException()
+     */
     @Override
     public long uploadFile(MultipartFile file) {
         String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -41,25 +60,39 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         try {
             Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            FileUpload newFileToStore = new FileUpload();
+            newFileToStore.setFileName(originalFilename);
+            newFileToStore.setLocation(copyLocation.toString());
+
+            FileUpload storedFile = fileUploadRepository.save(newFileToStore);
+            System.out.println(storedFile);
+
+            return storedFile.getId();
         } catch (Exception e) {
             throw new FileStorageException("Could not store file " + originalFilename + ". Please try again!");
         }
-
-        FileUpload newFileToStore = new FileUpload();
-        newFileToStore.setFileName(originalFilename);
-        newFileToStore.setLocation(copyLocation.toString());
-
-        FileUpload storedFile = fileUploadRepository.save(newFileToStore);
-        System.out.println(storedFile);
-
-        return storedFile.getId();
     }
 
+    /**
+     * Delete file repository by id
+     *
+     * @param id file id to remove
+     */
     @Override
     public void deleteFile(long id) {
         fileUploadRepository.deleteById(id);
     }
 
+    /**
+     * Download file by id
+     *
+     * @param id file id to download
+     *
+     * @return resource
+     * @throws RecordNotFoundException()
+     * @throws RecordNotFoundException()
+     */
     @Override
     public Resource downloadFile(long id) {
         Path uploads = Paths.get("./Uploads");
@@ -74,15 +107,21 @@ public class FileUploadServiceImpl implements FileUploadService {
                 resource = new UrlResource(path.toUri());
                 return resource;
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                throw new RecordNotFoundException("File not available");
             }
         }
         else {
-            throw new RecordNotFoundException("error");
+            throw new RecordNotFoundException("Error");
         }
-        return null;
     }
 
+    /**
+     * Get file by id
+     *
+     * @param id file id to get file content
+     * @return fileUpload.get()
+     * @throws RecordNotFoundException()
+     */
     @Override
     public FileUpload getFileById(long id) {
         Optional<FileUpload> fileUpload = fileUploadRepository.findById(id);
@@ -94,6 +133,11 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
+    /**
+     * Get file existence
+     *
+     * @param id file id to find
+     */
     @Override
     public boolean fileExistsById(long id) {
         return fileUploadRepository.existsById(id);

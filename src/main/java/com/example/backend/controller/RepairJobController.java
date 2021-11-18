@@ -22,56 +22,112 @@ public class RepairJobController {
     @Autowired
     private RepairItemRepository repairItemRepository;
 
+        /**
+         * Map getAllRepairJobs to get all repair jobs
+         *
+         * @return ok || badRequest
+         */
         @GetMapping("")
-        public ResponseEntity<Object> getRepairJob() {
-            return ResponseEntity.ok(repairJobService.getRepairJob());
+        public ResponseEntity<Object> getAllRepairJobs() {
+            if (repairJobService.getRepairJob() != null) {
+                return ResponseEntity.ok(repairJobService.getRepairJob());
+            } else {
+                return ResponseEntity.badRequest().body("No repair jobs found.");
+            }
         }
 
+        /**
+         * Map addRepairJob insert repair jobs with new attributes
+         *
+         * @param repairJobInformation the attributes for new repair jobs
+         *
+         * @return ok
+         */
         @PostMapping("")
-        public ResponseEntity<Object> addRepairJob(@RequestBody RepairJobDto repairJobDto) {
-            repairJobService.addRepairJob(repairJobDto);
+        public ResponseEntity<Object> addRepairJob(@RequestBody RepairJobDto repairJobInformation) {
+            repairJobService.addRepairJob(repairJobInformation);
             return ResponseEntity.ok("Added");
         }
 
+        /**
+         * Map getRepairJob to get repair jobs by id
+         *
+         * @param id get repair jobs by id
+         *
+         * @return ok || badRequest
+         */
         @GetMapping("/{id}")
-        public ResponseEntity<Object> getRepairJob(@PathVariable("id") long id) {
-            RepairJob repairJob = repairJobService.getRepairJob(id);
-            return ResponseEntity.ok(repairJob);
+        public ResponseEntity<Object> getRepairJobById(@PathVariable("id") long id) {
+            if (repairJobService.getRepairJob() != null) {
+                RepairJob repairJob = repairJobService.getRepairJob(id);
+                return ResponseEntity.ok(repairJob);
+            } else {
+                return ResponseEntity.badRequest().body("Id not found.");
+            }
         }
 
+        /**
+         * Map getByCustomerAgrees to get all repair jobs by customer agrees
+         *
+         * @param customerAgrees get repair jobs by customer agrees status
+         *
+         * @return customers
+         */
         @GetMapping("/customerAgrees")
         public List<CustomerDto> getByCustomerAgrees(@RequestParam String customerAgrees) {
 
-            var repairjobs = repairJobService.getByCustomerAgrees(customerAgrees);
-            var phonenumbers = new ArrayList<CustomerDto>();
-            for (int i = 0; i < repairjobs.size(); i++) {
-                var dto =  CustomerDto.fromCustomer(repairjobs.get(i).getCustomer());
-                phonenumbers.add(dto);
+            var repairJobs = repairJobService.getByCustomerAgrees(customerAgrees);
+            var customers = new ArrayList<CustomerDto>();
+            for (int i = 0; i < repairJobs.size(); i++) {
+                var customerInformation =  CustomerDto.fromCustomer(repairJobs.get(i).getCustomer());
+                customers.add(customerInformation);
             }
-            return phonenumbers;
+            return customers;
         }
 
-    @GetMapping("/repairStatus")
-    public ArrayList<RepairJobDto> getByRepairStatus (@RequestParam String repairStatus){
+        /**
+         * Map getRepairJobByStatus to get repair jobs by status
+         *
+         * @param repairStatus get repair jobs by repair status
+         *
+         * @return repairStatusCheck
+         */
+        @GetMapping("/repairStatus")
+        public ArrayList<RepairJobDto> getRepairJobByStatus(@RequestParam String repairStatus){
 
-        var repairjobs = repairJobService.getByRepairStatus(repairStatus);
-        var repairStatusCheck = new ArrayList<RepairJobDto>();
-        for (int i = 0; i < repairjobs.size(); i++) {
-            var dto = RepairJobDto.fromRepairStatus(repairjobs.get(i).getCustomer().getRepairJob());
-            repairStatusCheck.add(dto);
+            var repairJobStatus = repairJobService.getByRepairStatus(repairStatus);
+            var repairStatusCheck = new ArrayList<RepairJobDto>();
+            for (int i = 0; i < repairJobStatus.size(); i++) {
+                var repairJobs = RepairJobDto.fromRepairStatus(repairJobStatus.get(i).getCustomer().getRepairJob());
+                repairStatusCheck.add(repairJobs);
+            }
+            return repairStatusCheck;
         }
-        return repairStatusCheck;
-    }
 
+        /**
+         * Map updateRepairJob to update repair jobs by id
+         *
+         * @param id repairJob id to update
+         * @param repairJobInformation new repair job information
+         *
+         * @return ok
+         */
         @PutMapping("/{id}")
-        public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob updateRepairJob) {
-            repairJobService.updateRepairJob(id, updateRepairJob);
-            return ResponseEntity.noContent().build();
+        public ResponseEntity<Object> updateRepairJob(@PathVariable("id") long id, @RequestBody RepairJob repairJobInformation) {
+            repairJobService.updateRepairJob(id, repairJobInformation);
+            return ResponseEntity.ok("successfully updated.");
         }
 
+        /**
+         * Map removeRepairJob to remove repair jobs by id
+         *
+         * @param id repair job id to remove
+         *
+         * @return ok
+         */
         @DeleteMapping("/{id}")
         public ResponseEntity<Object> removeRepairJob (@PathVariable("id") long id) {
             repairJobService.removeRepairJob(id);
-            return ResponseEntity.noContent().build().ok("Deleted");
+            return ResponseEntity.ok("Deleted");
         }
 }

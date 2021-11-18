@@ -16,18 +16,37 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
 
     @Autowired
+    private CustomerRepository customerRepository;
+
+    /**
+     * Define car repository with customer repository
+     *
+     * @param customerRepository to add customer repository to car repository
+     */
+    @Autowired
     public CarServiceImpl(CarRepository customerRepository) {
         this.carRepository = customerRepository;
     }
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
+    /**
+     * Get all cars
+     *
+     * @return carRepository.findAll()
+     */
     @Override
     public List<Car> getCar() {
         return carRepository.findAll();
     }
 
+
+    /**
+     * Get car by id
+     *
+     * @param id find car repository by id
+     *
+     * @return car.get()
+     * @throws RecordNotFoundException No record available
+     */
     @Override
     public Car getCar ( long id) {
         Optional<Car> car = carRepository.findById(id);
@@ -38,22 +57,42 @@ public class CarServiceImpl implements CarService {
         }
     }
 
+    /**
+     * Add new car with attributes
+     *
+     * @param carInformation car information
+     *
+     * @return carRepository.save()
+     */
     @Override
-    public Car addCar (CarDto carDto){
+    public Car addCar (CarDto carInformation){
         Car car = new Car();
-        car.setLicensePlate(carDto.getLicensePlate());
-        car.setDayOfCarCheck(carDto.getDayOfCarCheck());
-        car.setDayOfRepairJob(carDto.getDayOfRepairJob());
-        Customer customer = customerRepository.findById(carDto.getCustomerId()).orElse(null);
+        car.setLicensePlate(carInformation.getLicensePlate());
+        car.setDayOfCarCheck(carInformation.getDayOfCarCheck());
+        car.setDayOfRepairJob(carInformation.getDayOfRepairJob());
+        Customer customer = customerRepository.findById(carInformation.getCustomerId()).orElse(null);
         car.setCustomer(customer);
         return carRepository.save(car);
     }
 
+    /**
+     * Remove car by id
+     *
+     * @param id car id to remove
+     */
     @Override
     public void removeCar ( long id){
         carRepository.deleteById(id);
     }
 
+    /**
+     * Update car by id
+     *
+     * @param id car id to find
+     * @param updateCar new car information
+     *
+     * @throws RecordNotFoundException()
+     */
     @Override
     public void updateCar(long id, Car updateCar) {
         Optional<Car> optionalCar = carRepository.findById(id);

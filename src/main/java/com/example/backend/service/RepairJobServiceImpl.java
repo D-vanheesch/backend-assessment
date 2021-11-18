@@ -19,6 +19,11 @@ import java.util.Optional;
 public class RepairJobServiceImpl implements RepairJobService {
     private final RepairJobRepository repairJobRepository;
 
+    /**
+     * Define repairJobServiceImpl repository with repairJob repository
+     *
+     * @param repairJobRepository to add repairJob repository to repairJob repository
+     */
     @Autowired
     public RepairJobServiceImpl(RepairJobRepository repairJobRepository) {
         this.repairJobRepository = repairJobRepository;
@@ -30,11 +35,24 @@ public class RepairJobServiceImpl implements RepairJobService {
     @Autowired
     private RepairItemRepository repairItemRepository;
 
+    /**
+     * Get all repairJobs
+     *
+     * @return repairJobRepository.findAll()
+     */
     @Override
     public List<RepairJob> getRepairJob() {
         return repairJobRepository.findAll();
     }
 
+    /**
+     * Get repairJob repository by id
+     *
+     * @param id repairJob id to find
+     *
+     * @return repairJob.get()
+     * @throws RecordNotFoundException Repairjob does not exist
+     */
     @Override
     public RepairJob getRepairJob ( long id) {
         Optional<RepairJob> repairJob = repairJobRepository.findById(id);
@@ -45,18 +63,42 @@ public class RepairJobServiceImpl implements RepairJobService {
         }
     }
 
+    /**
+     * Find repair jobs by customerAgrees
+     *
+     * @param customerAgrees customerAgrees to find all repairJobs
+     *
+     * @return optionalRepairJob
+     *
+     */
     @Override
     public List<RepairJob> getByCustomerAgrees(String customerAgrees) {
         List<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobsByCustomerAgrees(customerAgrees);
         return optionalRepairJob;
     }
 
+    /**
+     * Find repair jobs by repairStatus
+     *
+     * @param repairStatus repairStatus to find all repairJobs
+     *
+     * @return optionalRepairJob
+     *
+     */
     @Override
     public List<RepairJob> getByRepairStatus(String repairStatus) {
         List<RepairJob> optionalRepairJob = repairJobRepository.findRepairJobsByRepairStatus(repairStatus);
         return optionalRepairJob;
     }
 
+    /**
+     * Add repairJob
+     *
+     * @param repairJobDto repairJob information
+     *
+     * @return repairJob
+     *
+     */
     @Override
     public RepairJob addRepairJob (RepairJobDto repairJobDto){
         RepairJob repairJob = RepairJobDto.toRepairJob(repairJobDto);
@@ -73,11 +115,24 @@ public class RepairJobServiceImpl implements RepairJobService {
         return repairJob;
     }
 
+    /**
+     * Remove repairJob by id
+     *
+     * @param id repairJob id to delete
+     */
     @Override
     public void removeRepairJob ( long id){
         repairJobRepository.deleteById(id);
     }
 
+    /**
+     * Update repairJob by id
+     *
+     * @param id find repairJob repository by id
+     * @param updateRepairJob update repairJob repository by id
+     *
+     * @throws RecordNotFoundException repairJob does not exist
+     */
     @Override
     public void updateRepairJob(long id, RepairJob updateRepairJob) {
         Optional<RepairJob> optionalRepairJob = repairJobRepository.findById(id);

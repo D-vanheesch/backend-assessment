@@ -11,11 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice
 public class ExceptionController {
 
+    /**
+     * Exception made record not found
+     *
+     * @param exception exception information
+     *
+     * @return notFound
+     */
     @ExceptionHandler(value = RecordNotFoundException.class)
     public ResponseEntity<Object> exception(RecordNotFoundException exception) {
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Exception type of file storage
+     *
+     * @param exception exception information
+     *
+     * @return badRequest
+     */
     @ExceptionHandler(value = FileStorageException.class)
     public ResponseEntity<Object> exception(FileStorageException exception) {
         return ResponseEntity.badRequest().build();

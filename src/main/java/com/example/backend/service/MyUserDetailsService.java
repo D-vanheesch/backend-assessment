@@ -14,6 +14,13 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Get username information by username
+     *
+     * @param username username to get information
+     * @throws UsernameNotFoundException()
+     * @return MyUserPrincipal()
+     */
     @Override
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
